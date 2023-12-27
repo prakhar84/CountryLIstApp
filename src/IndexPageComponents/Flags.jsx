@@ -1,37 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Flags({ searchTerm, setSearchTerm, data }) {
   function showMap(countryMap) {
     window.open(countryMap);
   }
-
-  function details(countryDetails) {
-    window.location.href = `CountryDetail?country=${countryDetails}`;
-  }
-
-  // const addOrdinalSuffix = (day) => {
-  //   let suffix;
-  //   if (day >= 11 && day <= 13) {
-  //     suffix = `<sup>th</sup>`;
-  //   } else {
-  //     switch (day % 10) {
-  //       case 1:
-  //         suffix = `<sup>st</sup>`;
-  //       case 2:
-  //         suffix = `<sup>nd</sup>`;
-  //       case 3:
-  //         suffix = `<sup>rd</sup>`;
-  //       default:
-  //         suffix = `<sup>th</sup>`;
-  //     }
-  //   }
-  //   return (
-  //     <>
-  //       {day}
-  //       {suffix}
-  //     </>
-  //   );
-  // };
 
   function addOrdinalSuffix(day) {
     if (day >= 11 && day <= 13) {
@@ -49,6 +22,7 @@ function Flags({ searchTerm, setSearchTerm, data }) {
       }
     }
   }
+
   const calculateLocalDateTime = (country) => {
     if (!country.timezones || country.timezones.length === 0) {
       return "No timezone info";
@@ -155,14 +129,17 @@ function Flags({ searchTerm, setSearchTerm, data }) {
                   >
                     <strong style={{ fontSize: "large" }}>Show Map</strong>
                   </button>
-                  <button
+                  <Link
+                    to={{
+                      pathname: "/CountryDetail",
+                      search: `?country=${cntry.cca3}`,
+                    }}
                     type="button"
                     className="btn btn-outline-primary col-5"
-                    onClick={() => details(cntry.cca3)}
                     style={{ border: "3px solid blue", borderRadius: "2px" }}
                   >
                     <strong style={{ fontSize: "large" }}>Detail</strong>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

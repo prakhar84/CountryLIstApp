@@ -6,7 +6,6 @@ import "./Detail.css";
 function Details() {
   const [country, setCountry] = useState("12");
   const [loaded, setLoaded] = useState(false);
-
   let params = new URLSearchParams(document.location.search);
   let countrycca3code = params.get("country");
   const url = `https://restcountries.com/v3.1/alpha/${countrycca3code}`;
